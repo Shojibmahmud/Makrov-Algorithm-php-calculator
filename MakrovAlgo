@@ -1,0 +1,40 @@
+<?php
+$rules = [
+  "/z0/" => "0z",
+  "/z1/" => "1z",
+  "/u0/" => "0u",
+  "/u1/" => "1u",
+  "/#0/" => "0#z",
+  "/#1/" => "1#u",
+  "/0#/" => "#",
+  "/1#/" => "#",
+  "/#z/" => "z",
+  "/#u/" => "u",
+  "/z/" => "0",
+  "/u/" => "1"
+];
+$input = "#10100";
+
+while(true) 
+{
+  echo $input . "\n";
+  $run = false;
+  foreach ($rules as $rule => $replacement) 
+  {
+    if (preg_match($rule, $input)) 
+    {
+      $input = preg_replace($rule, $replacement, $input, 1);   
+      if (isset( $replacement{0} ) && $replacement{0} === ".") 
+      {
+        $run = false;
+      } 
+      else {
+        $run = true;
+      }          
+      break;
+    }
+  }
+  if(!$run) {
+    break;
+  }
+}
